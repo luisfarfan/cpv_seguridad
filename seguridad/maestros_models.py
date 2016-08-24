@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from django.db import models
-
+from relaciones_models import ReMenuPermisos
 
 # Create your models here.
 
@@ -81,7 +81,7 @@ class MaePermiso(models.Model):
     fec_edicion = models.DateTimeField(db_column='FEC_EDICION', blank=True, null=True)
 
     def __unicode__(self):
-        return '%s , %s' % (self.cod_permiso, self.nom_permiso)
+        return '%s , %s' % (self.cod_permiso, self.des_permiso)
 
     class Meta:
         managed = True
@@ -99,9 +99,10 @@ class MaeRol(models.Model):
     fec_creacion = models.DateTimeField(db_column='FEC_CREACION', auto_now_add=True)
     usr_edicion = models.CharField(db_column='USR_EDICION', max_length=8, blank=True, null=True)
     fec_edicion = models.DateTimeField(db_column='FEC_EDICION', blank=True, null=True)
+    menupermisos = models.ManyToManyField(ReMenuPermisos, through='ReMenuPermisosRol')
 
     def __unicode__(self):
-        return '%s , %s' % (self.id_rol, self.nom_rol)
+        return '%s' % self.des_rol
 
     class Meta:
         managed = True
