@@ -79,11 +79,18 @@ WSGI_APPLICATION = 'cpvapp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': 'DESARROLLO_CPV',
+        'USER': 'lfarfan',
+        'PASSWORD': 'lfarfan',
+        'HOST': '172.18.1.81',
+        'PORT': '',
 
+        'OPTIONS': {
+            'driver': 'SQL Server',
+        },
+    },
+}
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [

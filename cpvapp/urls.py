@@ -16,13 +16,11 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from seguridad.urls import *
-#from seguridad.views import ProyectoSistema
 
 
 urlpatterns = [
-    #url(r'^api/v1/', include(router.urls)),
+    url(r'^api/v1/', include(router.urls)),
     url(r'^admin/', admin.site.urls),
-    #url(r'^proyecto_sistema/', ProyectoSistemaView.as_view()),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
