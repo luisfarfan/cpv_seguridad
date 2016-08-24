@@ -20,12 +20,12 @@ class MaeSistemaSerializer(serializers.HyperlinkedModelSerializer):
 
 class MaePermisosSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = MaeSistema
+        model = MaePermiso
 
 
 class MaeRolesSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = MaeSistema
+        model = MaeRol
 
 
 class ReProyectoSistemaSerializer(serializers.ModelSerializer):
