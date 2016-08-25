@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 from django.db import models
 from relaciones_models import ReMenuPermisos
 
+
 # Create your models here.
 
 class MaeUsuario(models.Model):
@@ -16,7 +17,7 @@ class MaeUsuario(models.Model):
     nom_completo = models.CharField(db_column='NOMBRE_COMPLETO', max_length=250, blank=True, null=True)
     usuario = models.CharField(db_column='USUARIO', max_length=20, blank=True, null=True)
 
-    #proyectos_sistemas = models.ManyToManyField(ReProyectoSistemaMenu, through='ReUsuarioProyectoSistema')
+    # proyectos_sistemas = models.ManyToManyField(ReProyectoSistemaMenu, through='ReUsuarioProyectoSistema')
 
     def __unicode__(self):
         return '%s , %s' % (self.dni, self.nom_emp_per)
@@ -24,7 +25,6 @@ class MaeUsuario(models.Model):
     def save(self, *args, **kwargs):
         self.nom_completo = self.ape_pat_per + ' ' + self.ape_mat_per + ' ' + self.nom_emp_per
         return super(MaeUsuario, self).save(*args, **kwargs)
-
 
     class Meta:
         managed = True
