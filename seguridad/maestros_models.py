@@ -13,11 +13,18 @@ class MaeUsuario(models.Model):
     fec_nac_per = models.DateTimeField(db_column='FEC_NAC_PER', blank=True, null=True)  # Field name made lowercase.
     email_insti = models.CharField(db_column='EMAIL_INSTI', max_length=50, blank=True, null=True)
     sex_emp_per = models.CharField(db_column='SEX_EMP_PER', max_length=1, blank=True, null=True)
+    nom_completo = models.CharField(db_column='NOMBRE_COMPLETO', max_length=250, blank=True, null=True)
     usuario = models.CharField(db_column='USUARIO', max_length=20, blank=True, null=True)
+
     #proyectos_sistemas = models.ManyToManyField(ReProyectoSistemaMenu, through='ReUsuarioProyectoSistema')
 
     def __unicode__(self):
         return '%s , %s' % (self.dni, self.nom_emp_per)
+
+    def save(self, *args, **kwargs):
+        self.nom_completo = self.ape_pat_per + ' ' + self.ape_mat_per + ' ' + self.nom_emp_per
+        return super(MaeUsuario, self).save(*args, **kwargs)
+
 
     class Meta:
         managed = True
