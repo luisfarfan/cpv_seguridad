@@ -1,9 +1,12 @@
 from rest_framework import viewsets
 from .relaciones_models import *
 from serializer import *
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views import View
 from django.core import serializers
+import json
+import logging
+from datetime import datetime
 
 
 # Create your views here.
@@ -56,3 +59,29 @@ class MenuPermisosRolViewSet(viewsets.ModelViewSet):
 class MenuPermisosRolUsuarioViewSet(viewsets.ModelViewSet):
     queryset = ReMenuPermisosRolUsuario.objects.all()
     serializer_class = ReMenuPermisosRolUsuarioSerializer
+
+
+def get(request):
+    import json
+
+    padres = list(ReMenu.objects.filter(padre_id__isnull=True).values())
+    items = list(ReMenu.objects.filter(padre_id__isnull=False).values())
+    for k, v in enumerate(padres):
+        lista_dict = []
+        for key, value in enumerate(items):
+            if value['padre_id_id'] == v['id_menu']:
+                lista_dict.append(dict(value))
+                padres[k]['hijos'] = lista_dict
+
+    # return HttpResponse(padres)
+    return HttpResponse(json.dumps(padres, default=json_serial),content_type='application/json')
+    # return HttpResponse(json.dumps(menu, default=json_serial), content_type='application/json')
+
+
+def json_serial(obj):
+    """JSON serializer for objects not serializable by default json code"""
+
+    if isinstance(obj, datetime):
+        serial = obj.isoformat()
+        return serial
+    raise TypeError("Type not serializable")

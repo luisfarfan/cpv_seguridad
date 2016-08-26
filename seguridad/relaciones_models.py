@@ -37,9 +37,6 @@ class ReMenu(models.Model):
     img = models.CharField(db_column='IMG', max_length=255, blank=True, null=True)
     padre_id = models.ForeignKey('self', db_column='PADRE_ID',null=True, blank=True)
 
-    def __unicode__(self):
-        return '%s , %s, %s' % (self.id_proyectosistema, self.titulo, self.nom_menu)
-
     class Meta:
         managed = True
         db_table = 'TB_MENU'
