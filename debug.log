@@ -2231,3 +2231,44 @@ VariableDoesNotExist: Failed lookup for key [can_delete_related] in u'[{\'False\
 (0.002) QUERY = u'SELECT [TB_MENU].[ID_MENU], [TB_MENU].[ID_PROYECTOSISTEMA], [TB_MENU].[TITULO], [TB_MENU].[NOM_MENU], [TB_MENU].[DES_MENU], [TB_MENU].[FLAG_ACTIVO], [TB_MENU].[FLAG_ELIMINADO], [TB_MENU].[USR_CREACION], [TB_MENU].[FEC_CREACION], [TB_MENU].[USR_EDICION], [TB_MENU].[FEC_EDICION], [TB_MENU].[URL], [TB_MENU].[IMG], [TB_MENU].[PADRE_ID] FROM [TB_MENU] WHERE [TB_MENU].[PADRE_ID] IS NULL' - PARAMS = (); args=()
 (0.001) QUERY = u'SELECT [TB_MENU].[ID_MENU], [TB_MENU].[ID_PROYECTOSISTEMA], [TB_MENU].[TITULO], [TB_MENU].[NOM_MENU], [TB_MENU].[DES_MENU], [TB_MENU].[FLAG_ACTIVO], [TB_MENU].[FLAG_ELIMINADO], [TB_MENU].[USR_CREACION], [TB_MENU].[FEC_CREACION], [TB_MENU].[USR_EDICION], [TB_MENU].[FEC_EDICION], [TB_MENU].[URL], [TB_MENU].[IMG], [TB_MENU].[PADRE_ID] FROM [TB_MENU] WHERE [TB_MENU].[PADRE_ID] IS NOT NULL' - PARAMS = (); args=()
 "GET /setmenu/ HTTP/1.1" 200 2364
+(0.002) QUERY = "SELECT CAST(SERVERPROPERTY('ProductVersion') AS varchar)" - PARAMS = (); args=None
+(0.012) QUERY = 'SELECT TABLE_NAME, TABLE_TYPE FROM INFORMATION_SCHEMA.TABLES' - PARAMS = (); args=None
+(0.002) QUERY = u'SELECT [django_migrations].[app], [django_migrations].[name] FROM [django_migrations]' - PARAMS = (); args=()
+(0.001) QUERY = "SELECT CAST(SERVERPROPERTY('ProductVersion') AS varchar)" - PARAMS = (); args=None
+(0.001) QUERY = "SELECT CAST(SERVERPROPERTY('ProductVersion') AS varchar)" - PARAMS = (); args=None
+(0.001) QUERY = u'SELECT [TB_MENU].[ID_MENU], [TB_MENU].[ID_PROYECTOSISTEMA], [TB_MENU].[TITULO], [TB_MENU].[NOM_MENU], [TB_MENU].[DES_MENU], [TB_MENU].[FLAG_ACTIVO], [TB_MENU].[FLAG_ELIMINADO], [TB_MENU].[USR_CREACION], [TB_MENU].[FEC_CREACION], [TB_MENU].[USR_EDICION], [TB_MENU].[FEC_EDICION], [TB_MENU].[URL], [TB_MENU].[IMG], [TB_MENU].[PADRE_ID] FROM [TB_MENU] WHERE [TB_MENU].[PADRE_ID] IS NULL' - PARAMS = (); args=()
+(0.002) QUERY = u'SELECT [TB_MENU].[ID_MENU], [TB_MENU].[ID_PROYECTOSISTEMA], [TB_MENU].[TITULO], [TB_MENU].[NOM_MENU], [TB_MENU].[DES_MENU], [TB_MENU].[FLAG_ACTIVO], [TB_MENU].[FLAG_ELIMINADO], [TB_MENU].[USR_CREACION], [TB_MENU].[FEC_CREACION], [TB_MENU].[USR_EDICION], [TB_MENU].[FEC_EDICION], [TB_MENU].[URL], [TB_MENU].[IMG], [TB_MENU].[PADRE_ID] FROM [TB_MENU] WHERE [TB_MENU].[PADRE_ID] IS NOT NULL' - PARAMS = (); args=()
+"GET /setmenu/ HTTP/1.1" 200 2364
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\django\template\base.py", line 907, in _resolve_lookup
+    (bit, current))  # missing attribute
+VariableDoesNotExist: Failed lookup for key [name] in u'<RegexURLResolver <RegexURLPattern list> (None:None) ^api/v1/>'
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\django\template\base.py", line 907, in _resolve_lookup
+    (bit, current))  # missing attribute
+VariableDoesNotExist: Failed lookup for key [name] in u'<RegexURLResolver <RegexURLPattern list> (admin:admin) ^admin/>'
+Exception while resolving variable 'name' in template 'unknown'.
+Traceback (most recent call last):
+  File "C:\Python27\lib\site-packages\django\template\base.py", line 907, in _resolve_lookup
+    (bit, current))  # missing attribute
+VariableDoesNotExist: Failed lookup for key [name] in u"<RegexURLResolver <module 'rest_framework.urls' from 'C:\\Python27\\lib\\site-packages\\rest_framework\\urls.pyc'> (rest_framework:rest_framework) ^api-auth/>"
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2269
+(0.001) QUERY = "SELECT CAST(SERVERPROPERTY('ProductVersion') AS varchar)" - PARAMS = (); args=None
+(0.001) QUERY = "SELECT CAST(SERVERPROPERTY('ProductVersion') AS varchar)" - PARAMS = (); args=None
+(0.001) QUERY = u'SELECT [django_session].[session_key], [django_session].[session_data], [django_session].[expire_date] FROM [django_session] WHERE ([django_session].[session_key] = %s AND [django_session].[expire_date] > %s)' - PARAMS = (u'elrs6mvttuy6fozpy9vtdqtj45e9a722', datetime.datetime(2016, 8, 29, 14, 37, 13)); args=('elrs6mvttuy6fozpy9vtdqtj45e9a722', datetime.datetime(2016, 8, 29, 14, 37, 13))
+(0.001) QUERY = u'SELECT [auth_user].[id], [auth_user].[password], [auth_user].[last_login], [auth_user].[is_superuser], [auth_user].[username], [auth_user].[first_name], [auth_user].[last_name], [auth_user].[email], [auth_user].[is_staff], [auth_user].[is_active], [auth_user].[date_joined] FROM [auth_user] WHERE [auth_user].[id] = %s' - PARAMS = (1,); args=(1,)
+"GET /api/v1/ HTTP/1.1" 200 6702
+"GET /static/rest_framework/css/bootstrap-tweaks.css HTTP/1.1" 200 3399
+"GET /static/rest_framework/css/default.css HTTP/1.1" 200 1132
+"GET /static/rest_framework/css/prettify.css HTTP/1.1" 200 817
+"GET /static/rest_framework/css/bootstrap.min.css HTTP/1.1" 200 121200
+"GET /static/rest_framework/js/csrf.js HTTP/1.1" 200 1723
+"GET /static/rest_framework/js/prettify-min.js HTTP/1.1" 200 13632
+"GET /static/rest_framework/js/default.js HTTP/1.1" 200 1262
+"GET /static/rest_framework/js/jquery-1.12.4.min.js HTTP/1.1" 200 97163
+"GET /static/rest_framework/js/bootstrap.min.js HTTP/1.1" 200 37045
+"GET /static/rest_framework/js/ajax-form.js HTTP/1.1" 200 2876
+"GET /static/rest_framework/img/grid.png HTTP/1.1" 200 1458
