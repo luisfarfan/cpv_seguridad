@@ -5,8 +5,8 @@ from django.db import models
 
 class ReProyectoSistema(models.Model):
     id_proyectosistema = models.AutoField(db_column='ID_PROYECTOSISTEMA',primary_key=True)
-    id_proyecto = models.ForeignKey('MaeProyecto', on_delete=models.CASCADE, related_name='proyectos')
-    id_sistema = models.ForeignKey('MaeSistema', on_delete=models.CASCADE, related_name='sistemas')
+    id_proyecto = models.ForeignKey('MaeProyecto', db_column="ID_PROYECTO",on_delete=models.CASCADE, related_name='proyectos')
+    id_sistema = models.ForeignKey('MaeSistema', db_column="ID_SISTEMA", on_delete=models.CASCADE, related_name='sistemas')
     usr_creacion = models.CharField(db_column='USR_CREACION', max_length=8, blank=True, null=True)
     fec_creacion = models.DateTimeField(db_column='FEC_CREACION', auto_now_add=True)
     usr_edicion = models.CharField(db_column='USR_EDICION', max_length=8, blank=True, null=True)
@@ -36,6 +36,9 @@ class ReMenu(models.Model):
     url = models.CharField(db_column='URL', max_length=100, blank=True, null=True)
     img = models.CharField(db_column='IMG', max_length=255, blank=True, null=True)
     padre_id = models.ForeignKey('self', db_column='PADRE_ID',null=True, blank=True)
+
+    def __unicode__(self):
+        return '%s, %s' % (self.id_proyectosistema, self.nom_menu)
 
     class Meta:
         managed = True

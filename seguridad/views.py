@@ -85,3 +85,16 @@ def json_serial(obj):
         serial = obj.isoformat()
         return serial
     raise TypeError("Type not serializable")
+
+def procedure(request):
+    from django.db import connection
+
+    cursor = connection.cursor()
+    cursor.execute('exec getMenubyUser %s', [3])
+    columns = [column[0] for column in cursor.description]
+    results = []
+    for row in cursor.fetchall():
+        results.append(dict(zip(columns, row)))
+
+    return HttpResponse(results)
+    #return HttpResponse(json.dumps(results, default=json_serial), content_type='application/json')

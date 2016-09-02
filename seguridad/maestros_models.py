@@ -68,7 +68,7 @@ class MaeSistema(models.Model):
     proyectos = models.ManyToManyField(MaeProyecto, through='ReProyectoSistema')
 
     def __unicode__(self):
-        return '%s , %s' % (self.id_sistema, self.nom_sist)
+        return '%s , %s' % (self.id_sistema, self.des_sist)
 
     class Meta:
         managed = True
