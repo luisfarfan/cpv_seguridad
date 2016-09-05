@@ -16,6 +16,7 @@ class MaeUsuario(models.Model):
     sex_emp_per = models.CharField(db_column='SEX_EMP_PER', max_length=1, blank=True, null=True)
     nom_completo = models.CharField(db_column='NOMBRE_COMPLETO', max_length=250, blank=True, null=True)
     usuario = models.CharField(db_column='USUARIO', max_length=20, blank=True, null=True)
+    clave = models.CharField(db_column='CLAVE', max_length=20, blank=True, null=True)
 
     # proyectos_sistemas = models.ManyToManyField(ReProyectoSistemaMenu, through='ReUsuarioProyectoSistema')
 
