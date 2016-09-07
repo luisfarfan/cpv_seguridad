@@ -88,14 +88,14 @@ WSGI_APPLICATION = 'cpvapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'sql_server.pyodbc',
-        'NAME': 'SYS_SEGURIDAD',
-        'USER': 'sa',
-        'PASSWORD': 'luis123',
-        'HOST': 'localhost',
+        'NAME': 'DESARROLLO_CPV',
+        'USER': 'lfarfan',
+        'PASSWORD': 'lfarfan',
+        'HOST': '172.18.1.81',
         'PORT': '',
 
         'OPTIONS': {
-            'driver': 'ODBC Driver 13 for SQL Server',
+            'driver': 'SQL Server',
         },
     },
 }

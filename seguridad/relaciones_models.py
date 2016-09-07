@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 from maestros_models import *
 from django.db import models
+from django.utils.text import slugify
 
 
 class ReProyectoSistema(models.Model):
@@ -14,6 +15,7 @@ class ReProyectoSistema(models.Model):
 
     def __unicode__(self):
         return '%s , %s' % (self.id_proyecto, self.id_sistema)
+
 
     class Meta:
         managed = True
@@ -34,11 +36,16 @@ class ReMenu(models.Model):
     usr_edicion = models.CharField(db_column='USR_EDICION', max_length=8, blank=True, null=True)
     fec_edicion = models.DateTimeField(db_column='FEC_EDICION', blank=True, null=True)
     url = models.CharField(db_column='URL', max_length=100, blank=True, null=True)
+    slug = models.CharField(db_column='slug', max_length=100, blank=True, null=True)
     img = models.CharField(db_column='IMG', max_length=255, blank=True, null=True)
     padre_id = models.ForeignKey('self', db_column='PADRE_ID',null=True, blank=True)
 
     def __unicode__(self):
         return '%s, %s' % (self.id_proyectosistema, self.nom_menu)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.titulo)
+        return super(ReMenu, self).save(*args, **kwargs)
 
     class Meta:
         managed = True

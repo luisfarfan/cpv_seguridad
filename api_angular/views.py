@@ -3,6 +3,20 @@ from django.views import View
 import json
 from seguridad.helpers import json_serial
 from seguridad.db_views import ViewPermisosMenuChild
+from django.utils.text import slugify
+
+def menu(request, id=3):
+
+    return HttpResponse(json.dumps(get_session(id)), content_type='application/json')
+
+def routes(request, id=3):
+    menu = menu_parent_child(id)
+    route = []
+    for k in menu:
+        if k['PADRE_ID']==None:
+            route.append(slugify(k['TITULO']))
+
+    return HttpResponse(json.dumps(route), content_type='application/json')
 
 
 def get_session(id):
