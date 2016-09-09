@@ -13,7 +13,7 @@ def routes(request, id=3):
     menu = menu_parent_child(id)
     route = []
     for k in menu:
-        if k['PADRE_ID']==None:
+        if k['PADRE_ID']!=None:
             route.append(slugify(k['TITULO']))
 
     return HttpResponse(json.dumps(route), content_type='application/json')

@@ -7,18 +7,13 @@ import json
 
 
 def login(request):
+    user = list(MaeUsuario.objects.filter(
+            usuario='lfarfan', clave='luis123').values())
 
-    if request.method == 'POST':
-        usuario = request.POST.get('usuario')
-        clave = request.POST.get('clave')
-
-        user = list(MaeUsuario.objects.filter(
-            usuario=usuario, clave=clave).values())
-
-        if user:
-            sesion = get_session(user[0]['id_usuario'])
-            user[0]['detalle']=sesion
-        else:
-            user = []
+    if user:
+        sesion = get_session(user[0]['id_usuario'])
+        user[0]['detalle']=sesion
+    else:
+        user = []
 
     return HttpResponse(json.dumps(user, default=json_serial), content_type='application/json')
