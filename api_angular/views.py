@@ -6,10 +6,16 @@ from seguridad.db_views import ViewPermisosMenuChild
 from django.utils.text import slugify
 
 def menu(request):
+    menustring = '<div class="sidebar-content"><div class="sidebar-category sidebar-category-visible"><div class="category-content no-padding"><ul class="navigation navigation-main navigation-accordion"><li class="navigation-header"><span>Menu Principal</span><i class="icon-menu" title="Main pages"></i></li>';
+    menu = []
     if(request.method == 'GET'):
         id = request.GET.get('id_usuario', False)
+        menu = get_session(id)
+        for k,v in enumerate(menu):
+            menustring+='<li><a>'+v['TITULO']+'</a></li>'
 
-    return HttpResponse(json.dumps(get_session(id)), content_type='application/json')
+    menustring+='</ul></div></div></div>'
+    return HttpResponse(json.dumps({'menu':menustring}), content_type='application/json')
 
 def routes(request):
     if(request.method == 'GET'):
