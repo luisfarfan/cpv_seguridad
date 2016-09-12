@@ -62,7 +62,7 @@ class MenuPermisosRolUsuarioViewSet(viewsets.ModelViewSet):
 
 
 def procedure(request):
-    menu=set_permissions_to_menu_child(permissions(), menu_parent_child())
+    menu = set_permissions_to_menu_child(permissions(), menu_parent_child())
 
     return HttpResponse(json.dumps(menu, default=json_serial), content_type='application/json')
 

@@ -45,7 +45,7 @@ INSTALLED_APPS = [
 ]
 
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -53,8 +53,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware'
 ]
 
 ROOT_URLCONF = 'cpvapp.urls'
@@ -91,12 +91,11 @@ WSGI_APPLICATION = 'cpvapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'sql_server.pyodbc',
-        'NAME': 'DESARROLLO_CPV',
-        'USER': 'lfarfan',
-        'PASSWORD': 'lfarfan',
-        'HOST': '172.18.1.81',
+        'NAME': 'SYS_SEGURIDAD',
+        'USER': 'sa',
+        'PASSWORD': 'luis123',
+        'HOST': 'localhost',
         'PORT': '',
-
         'OPTIONS': {
             'driver': 'SQL Server',
         },
@@ -105,7 +104,7 @@ DATABASES = {
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        
+
     ]
 }
 
