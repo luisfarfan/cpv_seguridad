@@ -49,7 +49,7 @@ def get_routes(id):
 
 def get_session(id):
     menu=set_permissions_to_menu_child(permissions(id), menu_parent_child(id))
-
+    
     return menu
     #return HttpResponse(json.dumps(menu, default=json_serial), content_type='application/json')
 
