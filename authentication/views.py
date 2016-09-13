@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from seguridad.maestros_models import MaeUsuario
-from api_angular.views import get_session
+from api_angular.views import get_session,get_routes
 from seguridad.helpers import json_serial
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -19,6 +19,7 @@ def login(request):
         if user:
             sesion = get_session(user[0]['id_usuario'])
             user[0]['detalle'] = sesion
+            user[0]['routes'] = get_routes(user[0]['id_usuario'])
         else:
             user = False
 

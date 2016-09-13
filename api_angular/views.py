@@ -12,10 +12,18 @@ def menu(request):
         id = request.GET.get('id_usuario', False)
         menu = get_session(id)
         for k,v in enumerate(menu):
-            menustring+='<li><a>'+v['TITULO']+'</a></li>'
+            menustring+='<li><a><i class="icon-home4"></i><span>'+v['TITULO']+'</span></a>'
+            if 'hijos' in v:
+                menustring+='<ul>'
+                for kk,vv in enumerate(v['hijos']):
+                    menustring+='<li><a routerLink="/'+slugify(vv['TITULO'])+'" routerLinkActive="active">'+vv['TITULO']+'</a></li>'
+                menustring+='</ul></li>'
+            else:
+                menustring+='</li>'
 
     menustring+='</ul></div></div></div>'
     return HttpResponse(json.dumps({'menu':menustring}), content_type='application/json')
+
 
 def routes(request):
     if(request.method == 'GET'):
@@ -27,6 +35,16 @@ def routes(request):
                 route.append(slugify(k['TITULO']))
 
     return HttpResponse(json.dumps(route), content_type='application/json')
+
+
+def get_routes(id):
+    menu = menu_parent_child(id)
+    route = []
+    for k in menu:
+        if k['PADRE_ID']!=None:
+            route.append(slugify(k['TITULO']))
+
+    return route
 
 
 def get_session(id):
