@@ -19,6 +19,17 @@ class ReProyectoSistema(models.Model):
         db_column='USR_EDICION', max_length=8, blank=True, null=True)
     fec_edicion = models.DateTimeField(
         db_column='FEC_EDICION', blank=True, null=True)
+    titulo_sistema_padre = models.CharField(
+        db_column = 'TITULO_SISTEMA_PADRE',max_length=50, blank=True, null=True
+    )
+
+    def save(self, *args, **kwargs):
+        super(ReProyectoSistema, self).save(*args, **kwargs)
+        menu = ReMenu(id_proyectosistema=self)
+        #super(ReMenu, menu).save(*args, **kwargs)
+        #menu=ReMenu(id_proyectosistema=self.id_proyectosistema)
+        menu.save()
+        return self
 
     def __unicode__(self):
         return '%s , %s' % (self.id_proyecto, self.id_sistema)
