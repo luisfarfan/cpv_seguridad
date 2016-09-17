@@ -65,7 +65,7 @@ def menu_parent_child(id):
     from django.db import connection
 
     cursor = connection.cursor()
-    cursor.execute('exec getMenubyUser %s', [id])
+    cursor.execute('exec getMenubyUser %s', [str(id)])
     columns = [column[0] for column in cursor.description]
     menu = []
     for row in cursor.fetchall():
