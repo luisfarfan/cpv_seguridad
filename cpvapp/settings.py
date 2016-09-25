@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'cpvapp.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'sql_server.pyodbc',
@@ -95,6 +95,21 @@ DATABASES = {
          'USER': 'lfarfan',
          'PASSWORD': 'lfarfan',
          'HOST': '172.18.1.81',
+         'PORT': '',
+         'OPTIONS': {
+            'driver': 'SQL Server',
+        },
+    },
+}
+"""
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'sql_server.pyodbc',
+         'NAME': 'SYS_SEGURIDAD',
+         'USER': 'sa',
+         'PASSWORD': 'luis123',
+         'HOST': 'localhost',
          'PORT': '',
          'OPTIONS': {
             'driver': 'SQL Server',
