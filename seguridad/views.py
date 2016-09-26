@@ -7,10 +7,10 @@ from django.core import serializers
 import json
 import logging
 from helpers import json_serial
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
-
 class ProyectoViewSet(viewsets.ModelViewSet):
     queryset = MaeProyecto.objects.all()
     serializer_class = MaeProyectoSerializer

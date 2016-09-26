@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'seguridad.apps.SeguridadConfig',
     'api_angular.apps.ApiAngularConfig',
+    'proyectos_siga.apps.ProyectosSigaConfig',
     'authentication.apps.AuthenticationConfig'
 ]
 

@@ -18,11 +18,11 @@ from django.contrib import admin
 from seguridad.urls import *
 from seguridad import views
 
-
 urlpatterns = [
     url(r'^api/v1/', include(router.urls)),
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^authentication/', include('authentication.urls')),
     url(r'^api/', include('api_angular.urls')),
+    url(r'^', include('proyectos_siga.urls'))
 ]
