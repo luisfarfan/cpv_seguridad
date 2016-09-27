@@ -24,6 +24,24 @@ def menu(request):
     menustring+='</ul></div></div></div>'
     return HttpResponse(json.dumps({'menu':menustring}), content_type='application/json')
 
+def menu_singapp(request):
+    menustring = '<ul class="sidebar-nav">';
+    menu = []
+    if(request.method == 'GET'):
+        id = request.GET.get('id_usuario', False)
+        menu = get_session(id)
+        for k,v in enumerate(menu):
+            menustring+='<li><a class="collapsed" data-target="#sidebar-%s" data-toggle="collapse" data-parent="#sidebar"><span class="icon"><i class="fa fa-desktop"></i></span>%s<i class="toggle fa fa-angle-down"></i></a>' % (slugify(v['TITULO']), v['TITULO'])
+            if 'hijos' in v:
+                menustring+='<ul class="collapse" id="sidebar-%s">' % (slugify(v['TITULO']))
+                for kk,vv in enumerate(v['hijos']):
+                    menustring+='<li><a routerLink="'+slugify(vv['TITULO'])+'">'+vv['TITULO']+'</a></li>'
+                menustring+='</ul></li>'
+            else:
+                menustring+='</li>'
+    menustring+='</ul>'
+    return HttpResponse(json.dumps({'menu':menustring}), content_type='application/json')
+
 
 def routes(request):
     if(request.method == 'GET'):
