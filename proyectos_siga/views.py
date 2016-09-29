@@ -9,7 +9,7 @@ from serializer import ProyectosSigaSerializer
 @csrf_exempt
 def proyectossiga_list(request):
     if request.method == 'GET':
-        proyectossiga = ProyectosSiga.objects.all()
+        proyectossiga = ProyectosSiga.objects.all().order_by('desc_proyecto')
         serializer = ProyectosSigaSerializer(proyectossiga, many=True)
         return JSONResponse(serializer.data)
     else:

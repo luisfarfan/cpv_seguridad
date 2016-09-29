@@ -6,6 +6,7 @@ from rest_framework import routers, serializers, viewsets
 class MaeProyectoSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = MaeProyecto
+        fields = ('id_proyecto','sigla_proy','anio_proy','des_proy','tipo_proy')
 
 
 class MaeUsuariosSerializer(serializers.HyperlinkedModelSerializer):
@@ -16,6 +17,7 @@ class MaeUsuariosSerializer(serializers.HyperlinkedModelSerializer):
 class MaeSistemaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = MaeSistema
+        fields = ('id_sistema','des_sist','nom_sist','flag_activo','usr_creacion')
 
 
 class MaePermisosSerializer(serializers.HyperlinkedModelSerializer):
