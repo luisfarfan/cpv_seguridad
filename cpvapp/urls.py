@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^authentication/', include('authentication.urls')),
     url(r'^api/', include('api_angular.urls')),
-    url(r'^', include('proyectos_siga.urls'))
+    url(r'^', include('proyectos_siga.urls')),
+    url(r'^proysistema/(?P<pk>[0-9]+)/$', views.proysistema),
 ]

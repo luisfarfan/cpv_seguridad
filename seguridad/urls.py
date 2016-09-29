@@ -1,5 +1,7 @@
 from rest_framework import routers
 from views import *
+from seguridad import views
+
 
 router = routers.DefaultRouter()
 router.register(r'proyectos', ProyectoViewSet)
@@ -12,6 +14,3 @@ router.register(r'menu', MenuViewSet)
 router.register(r'menu_permisos', MenuPermisosViewSet)
 router.register(r'menu_permisos_rol', MenuPermisosRolViewSet)
 router.register(r'menu_permisos_rol_usuario', MenuPermisosRolUsuarioViewSet)
-
-
-

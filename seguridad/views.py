@@ -9,6 +9,11 @@ import logging
 from helpers import json_serial
 from django.views.decorators.csrf import csrf_exempt
 
+from django.http import HttpResponse
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
+from cpvapp.utils import JSONResponse
+
 
 # Create your views here.
 class ProyectoViewSet(viewsets.ModelViewSet):
@@ -112,3 +117,16 @@ def set_permissions_to_menu_child(permissions, menu):
                 padres[k]['hijos'] = listadict
 
     return padres
+
+@csrf_exempt
+def proysistema(request,pk):
+    try:
+        proyectossiga = ReProyectoSistema.objects.filter(id_proyecto=pk)
+    except ReProyectoSistema.DoesNotExist:
+        return JSONResponse({'msj':'no existe pk'})
+
+    if request.method == 'GET':
+        serializer = ReProyectoSistemaSerializer(proyectossiga)
+        return JSONResponse(serializer.data)
+    else:
+        return HttpResponse(status=403)

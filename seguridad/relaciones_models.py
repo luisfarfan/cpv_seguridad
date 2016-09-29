@@ -25,7 +25,7 @@ class ReProyectoSistema(models.Model):
 
     def save(self, *args, **kwargs):
         super(ReProyectoSistema, self).save(*args, **kwargs)
-        menu = ReMenu(id_proyectosistema=self)
+        menu = ReMenu(id_proyectosistema=self, titulo=self.titulo_sistema_padre, nom_menu=self.titulo_sistema_padre,des_menu=self.titulo_sistema_padre)
         #super(ReMenu, menu).save(*args, **kwargs)
         #menu=ReMenu(id_proyectosistema=self.id_proyectosistema)
         menu.save()

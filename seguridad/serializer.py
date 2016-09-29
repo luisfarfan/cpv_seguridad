@@ -33,6 +33,7 @@ class MaeRolesSerializer(serializers.HyperlinkedModelSerializer):
 class ReProyectoSistemaSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReProyectoSistema
+        fields = ('id_proyecto_id','titulo_sistema_padre')
 
 
 class ReMenuSerializer(serializers.ModelSerializer):
