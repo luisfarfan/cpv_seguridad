@@ -17,12 +17,27 @@ class MaeUsuariosSerializer(serializers.HyperlinkedModelSerializer):
 class MaeSistemaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = MaeSistema
-        fields = ('id_sistema','des_sist','nom_sist','flag_activo','usr_creacion')
+        fields = ('id_sistema','des_sist','nom_sist','flag_activo','usr_creacion','proyectos')
 
+
+class ProyectosbySistemaSerializer(serializers.HyperlinkedModelSerializer):
+    proyectos = MaeProyectoSerializer(many=True, read_only=True)
+    class Meta:
+        model = MaeSistema
+        fields = ('id_sistema','des_sist','nom_sist','flag_activo','usr_creacion','proyectos')
+    """
+    def create(self, validated_data):
+        proyectos = validated_data.pop('proyectos')
+        sistemas = MaeSistema.objects.create(**validated_data)
+        for proyecto in proyectos:
+            MaeProyecto.objects.create(sistemas=sistemas, **proyectos)
+        return sistemas
+    """
 
 class MaePermisosSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = MaePermiso
+        fields = ('id_permiso','des_permiso','cod_permiso','nom_permiso','usr_creacion')
 
 
 class MaeRolesSerializer(serializers.HyperlinkedModelSerializer):
@@ -31,9 +46,9 @@ class MaeRolesSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ReProyectoSistemaSerializer(serializers.ModelSerializer):
+    proyectos = MaeProyectoSerializer(many=True, read_only=True)
     class Meta:
         model = ReProyectoSistema
-        fields = ('id_proyecto_id','titulo_sistema_padre')
 
 
 class ReMenuSerializer(serializers.ModelSerializer):

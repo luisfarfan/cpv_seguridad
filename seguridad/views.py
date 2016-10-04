@@ -65,6 +65,10 @@ class MenuPermisosRolUsuarioViewSet(viewsets.ModelViewSet):
     queryset = ReMenuPermisosRolUsuario.objects.all()
     serializer_class = ReMenuPermisosRolUsuarioSerializer
 
+class ProyectosbySistemaViewSet(viewsets.ModelViewSet):
+    queryset = MaeSistema.objects.all()
+    serializer_class = ProyectosbySistemaSerializer
+
 
 def procedure(request):
     menu = set_permissions_to_menu_child(permissions(), menu_parent_child())
