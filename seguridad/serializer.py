@@ -17,7 +17,7 @@ class MaeUsuariosSerializer(serializers.HyperlinkedModelSerializer):
 class MaeSistemaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = MaeSistema
-        fields = ('id_sistema','des_sist','nom_sist','flag_activo','usr_creacion')
+        fields = ('id_sistema','des_sist','nom_sist','flag_activo','usr_creacion','proyectos')
 
 
 class MaePermisosSerializer(serializers.HyperlinkedModelSerializer):
@@ -33,7 +33,6 @@ class MaeRolesSerializer(serializers.HyperlinkedModelSerializer):
 class ReProyectoSistemaSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReProyectoSistema
-        fields = ('id_proyecto_id','titulo_sistema_padre')
 
 
 class ReMenuSerializer(serializers.ModelSerializer):
