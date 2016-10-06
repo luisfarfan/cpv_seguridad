@@ -72,6 +72,8 @@ class MaeProyecto(models.Model):
     fec_edicion = models.DateTimeField(
         db_column='FEC_EDICION', blank=True, null=True)
     cod_meta = models.CharField(db_column='COD_META',max_length=8,blank=True, null=True)
+    sistemas = models.ManyToManyField(
+        'MaeSistema', through='ReProyectoSistema')
 
     def __unicode__(self):
         return '%s , %s' % (self.id_proyecto, self.sigla_proy)
@@ -99,8 +101,6 @@ class MaeSistema(models.Model):
         db_column='USR_EDICION', max_length=8, blank=True, null=True)
     fec_edicion = models.DateTimeField(
         db_column='FEC_EDICION', blank=True, null=True)
-    proyectos = models.ManyToManyField(
-        MaeProyecto, through='ReProyectoSistema')
 
     def __unicode__(self):
         return '%s , %s' % (self.id_sistema, self.des_sist)

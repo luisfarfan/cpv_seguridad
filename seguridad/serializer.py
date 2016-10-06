@@ -3,7 +3,14 @@ from seguridad.maestros_models import *
 from rest_framework import routers, serializers, viewsets
 
 
+class MaeSistemaSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = MaeSistema
+        fields = ('id_sistema','des_sist','nom_sist','flag_activo','usr_creacion')
+
+
 class MaeProyectoSerializer(serializers.HyperlinkedModelSerializer):
+    #sistemas = MaeSistemaSerializer(many=True, read_only=True)
     class Meta:
         model = MaeProyecto
         fields = ('id_proyecto','sigla_proy','anio_proy','des_proy','tipo_proy')
@@ -14,17 +21,11 @@ class MaeUsuariosSerializer(serializers.HyperlinkedModelSerializer):
         model = MaeUsuario
 
 
-class MaeSistemaSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = MaeSistema
-        fields = ('id_sistema','des_sist','nom_sist','flag_activo','usr_creacion','proyectos')
-
-
 class ProyectosbySistemaSerializer(serializers.HyperlinkedModelSerializer):
-    proyectos = MaeProyectoSerializer(many=True, read_only=True)
+    sistemas = MaeSistemaSerializer(many=True, read_only=True)
     class Meta:
-        model = MaeSistema
-        fields = ('id_sistema','des_sist','nom_sist','flag_activo','usr_creacion','proyectos')
+        model = MaeProyecto
+        fields = ('id_proyecto','sigla_proy','anio_proy','des_proy','tipo_proy','sistemas')
     """
     def create(self, validated_data):
         proyectos = validated_data.pop('proyectos')

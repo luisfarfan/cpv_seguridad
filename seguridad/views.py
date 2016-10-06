@@ -66,7 +66,7 @@ class MenuPermisosRolUsuarioViewSet(viewsets.ModelViewSet):
     serializer_class = ReMenuPermisosRolUsuarioSerializer
 
 class ProyectosbySistemaViewSet(viewsets.ModelViewSet):
-    queryset = MaeSistema.objects.all()
+    queryset = MaeProyecto.objects.all()
     serializer_class = ProyectosbySistemaSerializer
 
 
