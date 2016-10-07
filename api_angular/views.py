@@ -6,10 +6,11 @@ from seguridad.db_views import ViewPermisosMenuChild
 from django.utils.text import slugify
 
 def menu(request):
-    menustring = '<div class="sidebar-content"><div class="sidebar-category sidebar-category-visible"><div class="category-content no-padding"><ul class="navigation navigation-main navigation-accordion"><li class="navigation-header"><span>Menu Principal</span><i class="icon-menu" title="Main pages"></i></li>';
+    menustring = '<div class="sidebar-content"><div class="sidebar-category sidebar-category-visible"><div class="category-content no-padding"><ul class="navigation navigation-main navigation-accordion"><li class="navigation-header"><span>Menu Principal</span><i class="icon-menu" title="Main pages"></i></li>'
     menu = []
     if(request.method == 'GET'):
         id = request.GET.get('id_usuario', False)
+
         menu = get_session(id)
         for k,v in enumerate(menu):
             menustring+='<li><a><i class="icon-home4"></i><span>'+v['TITULO']+'</span></a>'
@@ -25,7 +26,7 @@ def menu(request):
     return HttpResponse(json.dumps({'menu':menustring}), content_type='application/json')
 
 def menu_singapp(request):
-    menustring = '<ul class="sidebar-nav">';
+    menustring = '<ul class="sidebar-nav">'
     menu = []
     if(request.method == 'GET'):
         id = request.GET.get('id_usuario', False)
@@ -36,11 +37,12 @@ def menu_singapp(request):
                 menustring+='<ul class="collapse" id="sidebar-%s">' % (slugify(v['TITULO']))
                 for kk,vv in enumerate(v['hijos']):
                     menustring+='<li><a routerLink="'+slugify(vv['TITULO'])+'">'+vv['TITULO']+'</a></li>'
+                menustring+='<li><a routerLink="reportes">REPORTES</a></li>'
                 menustring+='</ul></li>'
             else:
                 menustring+='</li>'
     menustring+='</ul>'
-    return HttpResponse(json.dumps({'menu':menustring}), content_type='application/json')
+    return HttpResponse(json.dumps({'menu':menustring,'data':menu}), content_type='application/json')
 
 
 def routes(request):
