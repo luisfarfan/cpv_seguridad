@@ -101,6 +101,18 @@ DATABASES = {
             'driver': 'SQL Server',
         },
     },
+    'siga_sql': {
+        'ENGINE': 'sql_server.pyodbc',
+         'NAME': 'INEI_BDRRHH_CONSECUCION',
+         'USER': 'rvila',
+         'PASSWORD': 'inei1202',
+         'HOST': '192.168.200.250',
+         'PORT': '',
+         'OPTIONS': {
+            'driver': 'SQL Server',
+            'unicode_results':True
+        },
+    },
 }
 
 """
@@ -121,9 +133,11 @@ DATABASES = {
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-
-    ]
+    'UNICODE_JSON': False,
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    )
 }
 
 # Password validation

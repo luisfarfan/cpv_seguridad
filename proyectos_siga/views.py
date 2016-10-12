@@ -9,7 +9,7 @@ from serializer import ProyectosSigaSerializer
 @csrf_exempt
 def proyectossiga_list(request):
     if request.method == 'GET':
-        proyectossiga = ProyectosSiga.objects.all().order_by('desc_proyecto')
+        proyectossiga = ProyectosSiga.objects.using('siga_sql').all().order_by('desc_proyecto')
         serializer = ProyectosSigaSerializer(proyectossiga, many=True)
         return JSONResponse(serializer.data)
     else:
@@ -18,7 +18,7 @@ def proyectossiga_list(request):
 @csrf_exempt
 def proyectossiga_detail(request,pk):
     try:
-        proyectossiga = ProyectosSiga.objects.get(pk=pk)
+        proyectossiga = ProyectosSiga.objects.using('siga_sql').get(pk=pk)
     except ProyectosSiga.DoesNotExist:
         return JSONResponse({'msj':'no existe pk'})
 
