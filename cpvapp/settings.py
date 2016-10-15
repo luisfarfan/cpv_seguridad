@@ -88,7 +88,7 @@ WSGI_APPLICATION = 'cpvapp.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'sql_server.pyodbc',
@@ -102,8 +102,8 @@ DATABASES = {
         },
     },
 }
-
 """
+
 DATABASES = {
     'default': {
         'ENGINE': 'sql_server.pyodbc',
@@ -117,7 +117,7 @@ DATABASES = {
         },
     },
 }
-"""
+
 
 
 REST_FRAMEWORK = {
