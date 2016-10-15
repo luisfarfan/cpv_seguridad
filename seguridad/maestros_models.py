@@ -50,7 +50,7 @@ class MaeProyecto(models.Model):
     anio_proy = models.CharField(
         db_column='ANIO_PROY', max_length=4, blank=True, null=True)
     des_proy = models.CharField(
-        db_column='DES_PROY', max_length=60, blank=True, null=True)
+        db_column='DES_PROY', max_length=255, blank=True, null=True)
     tipo_proy = models.CharField(
         db_column='TIPO_PROY', max_length=1, blank=True, null=True)
     fec_inicio = models.DateTimeField(
