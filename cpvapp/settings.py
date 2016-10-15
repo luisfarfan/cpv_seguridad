@@ -16,6 +16,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -27,6 +28,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# HOST_API_APP1 = os.getenv('HOST_API_APP1', 'http://localhost:3000')
+
+if DEBUG:
+    HOST_API_APP1 = 'http://localhost:3000'
+else:
+    HOST_API_APP1 = 'http://api.app1.inei.gob.pe'
 
 # Application definition
 
@@ -101,6 +108,18 @@ DATABASES = {
             'driver': 'SQL Server',
         },
     },
+    'siga_sql': {
+        'ENGINE': 'sql_server.pyodbc',
+         'NAME': 'INEI_BDRRHH_CONSECUCION',
+         'USER': 'rvila',
+         'PASSWORD': 'inei1202',
+         'HOST': '192.168.200.250',
+         'PORT': '',
+         'OPTIONS': {
+            'driver': 'SQL Server',
+            'unicode_results':True
+        },
+    },
 }
 """
 
@@ -121,9 +140,11 @@ DATABASES = {
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-
-    ]
+    'UNICODE_JSON': False,
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    )
 }
 
 # Password validation
@@ -165,3 +186,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 CORS_ORIGIN_ALLOW_ALL = True
+
