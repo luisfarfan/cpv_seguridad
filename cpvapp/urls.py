@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^api/', include('api_angular.urls')),
     url(r'^', include('proyectos_siga.urls')),
     url(r'^proysistema/(?P<pk>[0-9]+)/$', views.proysistema),
+    url(r'^deleteProyectoSistema/(?P<id_proyecto>[0-9]+)/(?P<id_sistema>[0-9]+)/$', views.deleteSistema),
 ]

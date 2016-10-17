@@ -1,17 +1,9 @@
-from rest_framework import viewsets
 from .relaciones_models import *
 from serializer import *
-from django.http import HttpResponse, JsonResponse
-from django.views import View
-from django.core import serializers
 import json
-import logging
 from helpers import json_serial
 from django.views.decorators.csrf import csrf_exempt
-
 from django.http import HttpResponse
-from rest_framework.renderers import JSONRenderer
-from rest_framework.parsers import JSONParser
 from cpvapp.utils import JSONResponse
 
 
@@ -64,6 +56,7 @@ class MenuPermisosRolViewSet(viewsets.ModelViewSet):
 class MenuPermisosRolUsuarioViewSet(viewsets.ModelViewSet):
     queryset = ReMenuPermisosRolUsuario.objects.all()
     serializer_class = ReMenuPermisosRolUsuarioSerializer
+
 
 class ProyectosbySistemaViewSet(viewsets.ModelViewSet):
     queryset = MaeProyecto.objects.all()
@@ -122,15 +115,22 @@ def set_permissions_to_menu_child(permissions, menu):
 
     return padres
 
+
 @csrf_exempt
-def proysistema(request,pk):
+def proysistema(request, pk):
     try:
         proyectossiga = ReProyectoSistema.objects.filter(id_proyecto=pk)
     except ReProyectoSistema.DoesNotExist:
-        return JSONResponse({'msj':'no existe pk'})
+        return JSONResponse({'msj': 'no existe pk'})
 
     if request.method == 'GET':
         serializer = ReProyectoSistemaSerializer(proyectossiga)
         return JSONResponse(serializer.data)
     else:
         return HttpResponse(status=403)
+
+
+@csrf_exempt
+def deleteSistema(request, id_proyecto, id_sistema):
+    ReProyectoSistema.objects.filter(id_proyecto=id_proyecto, id_sistema=id_sistema).delete()
+    return JSONResponse({'msj': 'borrado con exito'})

@@ -35,7 +35,7 @@ class MaeUsuario(models.Model):
 
     def save(self, *args, **kwargs):
         self.nom_completo = self.ape_pat_per + ' ' + \
-            self.ape_mat_per + ' ' + self.nom_emp_per
+                            self.ape_mat_per + ' ' + self.nom_emp_per
         return super(MaeUsuario, self).save(*args, **kwargs)
 
     class Meta:
@@ -71,7 +71,7 @@ class MaeProyecto(models.Model):
         db_column='USR_EDICION', max_length=8, blank=True, null=True)
     fec_edicion = models.DateTimeField(
         db_column='FEC_EDICION', blank=True, null=True)
-    cod_meta = models.CharField(db_column='COD_META',max_length=8,blank=True, null=True)
+    cod_meta = models.CharField(db_column='COD_META', max_length=8, blank=True, null=True)
     sistemas = models.ManyToManyField(
         'MaeSistema', through='ReProyectoSistema')
 
@@ -89,6 +89,7 @@ class MaeSistema(models.Model):
         db_column='DES_SIST', max_length=100, blank=True, null=True)
     nom_sist = models.CharField(
         db_column='NOM_SIST', max_length=50, blank=True, null=True)
+    codigo_sist = models.CharField(db_column='CODIGO_SISTEMA', max_length=20, blank=True, null=True)
     flag_activo = models.CharField(
         db_column='FLAG_ACTIVO', max_length=1, blank=True, null=True)
     flag_eliminado = models.CharField(

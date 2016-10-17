@@ -15,8 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -29,11 +27,6 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # HOST_API_APP1 = os.getenv('HOST_API_APP1', 'http://localhost:3000')
-
-if DEBUG:
-    HOST_API_APP1 = 'http://localhost:3000'
-else:
-    HOST_API_APP1 = 'http://api.app1.inei.gob.pe'
 
 # Application definition
 
@@ -49,9 +42,9 @@ INSTALLED_APPS = [
     'seguridad.apps.SeguridadConfig',
     'api_angular.apps.ApiAngularConfig',
     'proyectos_siga.apps.ProyectosSigaConfig',
-    'authentication.apps.AuthenticationConfig'
+    'authentication.apps.AuthenticationConfig',
+    'api_seguridad.apps.ApiSeguridadConfig'
 ]
-
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -84,7 +77,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'cpvapp.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
@@ -126,18 +118,16 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'sql_server.pyodbc',
-         'NAME': 'SYS_SEGURIDAD',
-         'USER': 'sa',
-         'PASSWORD': 'luis123',
-         'HOST': 'localhost',
-         'PORT': '',
-         'OPTIONS': {
+        'NAME': 'SYS_SEGURIDAD',
+        'USER': 'sa',
+        'PASSWORD': 'luis123',
+        'HOST': 'localhost',
+        'PORT': '',
+        'OPTIONS': {
             'driver': 'SQL Server',
         },
     },
 }
-
-
 
 REST_FRAMEWORK = {
     'UNICODE_JSON': False,
@@ -165,7 +155,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -179,11 +168,9 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
 
 CORS_ORIGIN_ALLOW_ALL = True
-
