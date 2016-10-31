@@ -5,26 +5,62 @@ from django.utils.text import slugify
 
 
 def menu(request):
-    menustring = '<div class="sidebar-content"><div class="sidebar-category sidebar-category-visible"><div class="category-content no-padding"><ul class="navigation navigation-main navigation-accordion"><li class="navigation-header"><span>Menu Principal</span><i class="icon-menu" title="Main pages"></i></li>'
-    menu = []
     if (request.method == 'GET'):
-        id = request.GET.get('id_usuario', False)
+        #id = request.GET.get('id_usuario', False)
+        menu = recursive_menu_tree()
 
-        menu = get_session(1)
-        for k, v in enumerate(menu):
-            menustring += '<li><a><i class="icon-home4"></i><span>' + v['TITULO'] + '</span></a>'
-            if 'hijos' in v:
-                menustring += '<ul>'
-                for kk, vv in enumerate(v['hijos']):
-                    menustring += '<li><a routerLink="/' + slugify(vv['TITULO']) + '" routerLinkActive="active">' + vv[
-                        'TITULO'] + '</a></li>'
-                menustring += '</ul></li>'
-            else:
-                menustring += '</li>'
-
-    menustring += '</ul></div></div></div>'
     return HttpResponse(json.dumps(menu), content_type='application/json')
 
+def menu_tree(request):
+    tree = []
+
+
+def recursive_menu_session():
+    menu = get_session(1)
+    clone = menu
+    resultado = []
+    for k, v in enumerate(clone):
+        for kk, vv in enumerate(menu):
+            if clone[k]['PADRE_ID'] == menu[kk]['ID_MENU']:
+                menu[kk]['childs'].append(dict(clone[k]))
+
+    for k, v in enumerate(menu):
+        if v['PADRE_ID'] is None:
+            resultado.append(v)
+
+    return resultado
+
+def recursive_menu_tree():
+    menu = get_session(1)
+    menures = []
+    for k, v in enumerate(menu):
+        del menu[k]['sigla_proy']
+        del menu[k]['ID_PROYECTO']
+        del menu[k]['DES_SIST']
+        del menu[k]['ID_SISTEMA']
+        if 'permisos' in menu[k]:
+            del menu[k]['permisos']
+        menures.append(
+            {'id': menu[k]['ID_MENU'],
+             'name':menu[k]['TITULO'],
+             'children':[],
+             'padre_id':menu[k]['PADRE_ID'],
+             'slug':slugify(menu[k]['TITULO'])
+             })
+
+
+    clone = menures
+    resultado = []
+    for k, v in enumerate(clone):
+        for kk, vv in enumerate(menures):
+            if clone[k]['padre_id'] == menures[kk]['id']:
+                menures[kk]['children'].append(dict(clone[k]))
+
+    for k, v in enumerate(menures):
+        if v['padre_id'] is None:
+            resultado.append(v)
+
+    return resultado
 
 def menu_singapp(request):
     menustring = '<ul class="sidebar-nav">'
@@ -105,29 +141,12 @@ def set_permissions_to_menu_child(permissions, menu):
         else:
             hijos.append(menu[k])
 
-    for k, v in enumerate(hijos):
+    for k, v in enumerate(menu):
         permisos = []
+        menu[k]['childs'] = []
         for kk, vv in enumerate(permissions):
             if vv['id_menu'] == v['ID_MENU']:
                 permisos.append(dict(permissions[kk]))
-                hijos[k]['permisos'] = permisos
+                menu[k]['permisos'] = permisos
 
-    for k, v in enumerate(padres):
-        listadict = []
-        for kk, vv in enumerate(hijos):
-            if hijos[kk]['PADRE_ID'] == padres[k]['ID_MENU']:
-                listadict.append(dict(hijos[kk]))
-                padres[k]['hijos'] = listadict
-                #del hijos[kk]
-
-    for k, v in enumerate(padres):
-        if 'hijos' in padres[k]:
-            for key, val in enumerate(padres[k]['hijos']):
-                listadict = []
-                for kk, vv in enumerate(hijos):
-                    if hijos[kk]['PADRE_ID'] == padres[k]['hijos'][key]['ID_MENU']:
-                        listadict.append(dict(hijos[kk]))
-                        padres[k]['hijos'][key]['hijos'] = listadict
-                        del hijos[kk]
-
-    return padres
+    return menu

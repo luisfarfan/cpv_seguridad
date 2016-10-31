@@ -20,14 +20,15 @@ class ReProyectoSistema(models.Model):
     fec_edicion = models.DateTimeField(
         db_column='FEC_EDICION', blank=True, null=True)
     titulo_sistema_padre = models.CharField(
-        db_column = 'TITULO_SISTEMA_PADRE',max_length=50, blank=True, null=True
+        db_column='TITULO_SISTEMA_PADRE', max_length=50, blank=True, null=True
     )
 
     def save(self, *args, **kwargs):
         super(ReProyectoSistema, self).save(*args, **kwargs)
-        menu = ReMenu(id_proyectosistema=self, titulo=self.titulo_sistema_padre, nom_menu=self.titulo_sistema_padre,des_menu=self.titulo_sistema_padre)
-        #super(ReMenu, menu).save(*args, **kwargs)
-        #menu=ReMenu(id_proyectosistema=self.id_proyectosistema)
+        menu = ReMenu(id_proyectosistema=self, titulo=self.titulo_sistema_padre, nom_menu=self.titulo_sistema_padre,
+                      des_menu=self.titulo_sistema_padre)
+        # super(ReMenu, menu).save(*args, **kwargs)
+        # menu=ReMenu(id_proyectosistema=self.id_proyectosistema)
         menu.save()
         return self
 
@@ -135,7 +136,7 @@ class ReMenuPermisosRol(models.Model):
     id_rol = models.ForeignKey(
         'MaeRol', db_column='ID_ROL', on_delete=models.CASCADE, related_name='roles')
     id_menupermisos = models.ForeignKey(
-        ReMenuPermisos, db_column='ID_MENUPERMISOS', on_delete=models.CASCADE, related_name='remenupermisos')
+        'ReMenuPermisos', db_column='ID_MENUPERMISOS', on_delete=models.CASCADE, related_name='menupermisos')
     flag_activo = models.CharField(
         db_column='FLAG_ACTIVO', max_length=1, blank=True, null=True)
     flag_eliminado = models.CharField(

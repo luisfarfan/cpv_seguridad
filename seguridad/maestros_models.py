@@ -7,6 +7,7 @@ from relaciones_models import ReMenuPermisos
 
 class MaeUsuario(models.Model):
     id_usuario = models.AutoField(primary_key=True, db_column='ID_USUARIO')
+    id_tipousuario = models.ForeignKey('MaeTipoUsuario')
     dni = models.CharField(db_column='DNI', max_length=8)
     ape_pat_per = models.CharField(
         db_column='APE_PAT_PER', max_length=35, blank=True, null=True)
@@ -14,11 +15,16 @@ class MaeUsuario(models.Model):
         db_column='APE_MAT_PER', max_length=35, blank=True, null=True)
     nom_emp_per = models.CharField(
         db_column='NOM_EMP_PER', max_length=35, blank=True, null=True)
+    fecha_contrato_inicio = models.DateField(blank=True, null=True)
+    fecha_contrato_fin = models.DateField(blank=True, null=True)
+    fecha_contrato_fin_extended = models.DateField(blank=True, null=True)
     # Field name made lowercase.
-    fec_nac_per = models.DateTimeField(
+    fec_nac_per = models.DateField(
         db_column='FEC_NAC_PER', blank=True, null=True)
     email_insti = models.CharField(
         db_column='EMAIL_INSTI', max_length=50, blank=True, null=True)
+    email_personal = models.CharField(
+        db_column='EMAIL_PERSONAL', max_length=50, blank=True, null=True)
     sex_emp_per = models.CharField(
         db_column='SEX_EMP_PER', max_length=1, blank=True, null=True)
     nom_completo = models.CharField(
@@ -41,6 +47,17 @@ class MaeUsuario(models.Model):
     class Meta:
         managed = True
         db_table = 'USUARIO'
+
+
+class MaeTipoUsuario(models.Model):
+    id_tipousuario = models.AutoField(primary_key=True, db_column='ID_TIPOUSUARIO')
+    nombre_tipousuario = models.CharField(max_length=25, blank=True, null=True)
+    descripcion_tipousuario = models.CharField(max_length=200, blank=True, null=True)
+    estado = models.IntegerField(default=1)
+
+    class Meta:
+        managed = True
+        db_table = 'TIPO_USUARIO'
 
 
 class MaeProyecto(models.Model):
